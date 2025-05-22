@@ -1,5 +1,6 @@
 const
     selectElement = (id: string) => document.querySelector(id) as HTMLElement,
+    selectAll = (id: string) => document.querySelectorAll(id) as NodeListOf<Element>,
     showElement = (element: HTMLElement) => element!.style.display = `flex`,
     hideElement = (element: HTMLElement) => element!.style.display = `none`,
     /** Repeat Elements */
@@ -31,6 +32,7 @@ const
 
 export {
     selectElement,
+    selectAll,
     showElement,
     hideElement,
     repeatElements,

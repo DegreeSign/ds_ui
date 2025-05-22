@@ -1,4 +1,4 @@
-declare const selectElement: (id: string) => HTMLElement, showElement: (element: HTMLElement) => string, hideElement: (element: HTMLElement) => string, 
+declare const selectElement: (id: string) => HTMLElement, selectAll: (id: string) => NodeListOf<Element>, showElement: (element: HTMLElement) => string, hideElement: (element: HTMLElement) => string, 
 /** Repeat Elements */
 repeatElements: ({ children, parent, targetCount, }: {
     /** Child Element Nodes */
@@ -8,4 +8,4 @@ repeatElements: ({ children, parent, targetCount, }: {
     /** Target Count */
     targetCount: number;
 }) => void;
-export { selectElement, showElement, hideElement, repeatElements, };
+export { selectElement, selectAll, showElement, hideElement, repeatElements, };
