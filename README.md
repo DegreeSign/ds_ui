@@ -1,2 +1,1 @@
-# ds_ui
-DegreeSign UI functions
+# DegreeSign UI functions

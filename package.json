@@ -1,5 +1,5 @@
 {
-  "name": "degreesign",
+  "name": "@degreesign/ui",
   "version": "1.0.0",
   "description": "DegreeSign UI Controls",
   "main": "dist/node/degreesign.node.min.js",
