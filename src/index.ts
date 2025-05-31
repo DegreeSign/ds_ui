@@ -1,6 +1,6 @@
 const
-    selectElement = (id: string) => document.querySelector(id) as HTMLElement,
-    selectAll = (id: string) => document.querySelectorAll(id) as NodeListOf<Element>,
+    selectElement = (id: string, parent?: Element) => (parent || document).querySelector(id) as HTMLElement,
+    selectAll = (id: string, parent?: Element) => (parent || document).querySelectorAll(id) as NodeListOf<Element>,
     showElement = (element: HTMLElement) => element!.style.display = `flex`,
     hideElement = (element: HTMLElement) => element!.style.display = `none`,
     /** Repeat Elements */
