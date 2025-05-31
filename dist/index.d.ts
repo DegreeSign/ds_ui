@@ -2,9 +2,9 @@ declare const selectElement: (id: string) => HTMLElement, selectAll: (id: string
 /** Repeat Elements */
 repeatElements: ({ children, parent, targetCount, }: {
     /** Child Element Nodes */
-    children: NodeListOf<any> | undefined;
+    children?: NodeListOf<Element>;
     /** Parent Element */
-    parent: any;
+    parent: Element;
     /** Target Count */
     targetCount: number;
 }) => void;

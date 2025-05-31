@@ -10,21 +10,22 @@ const
         targetCount,
     }: {
         /** Child Element Nodes */
-        children: NodeListOf<any> | undefined,
+        children?: NodeListOf<Element>,
         /** Parent Element */
-        parent: any,
+        parent: Element,
         /** Target Count */
         targetCount: number
     }) => {
         try {
-            const totalLength = children ? children.length : 0;
-            if (children)
-                if (targetCount > totalLength)
+            if (children?.length) {
+                const totalLength = children?.length || 0;
+                if (targetCount > totalLength) {
                     for (let i = totalLength; i < targetCount; i++)
-                        parent.appendChild(children[0].cloneNode(1));
-                else if (targetCount < totalLength && targetCount != 0)
+                        parent.appendChild(children[0]?.cloneNode(true));
+                } else if (targetCount < totalLength && targetCount != 0)
                     for (let i = totalLength - 1; i >= targetCount; i--)
                         children[i]?.remove();
+            };
         } catch (e) {
             console.log(`Error repeating elements`, targetCount, e);
         };
