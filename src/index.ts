@@ -17,7 +17,7 @@ const
         targetCount,
     }: {
         /** Child Element Nodes */
-        children?: NodeListOf<Element>,
+        children?: NodeListOf<Element> | HTMLCollection,
         /** Parent Element */
         parent: Element | string,
         /** Target Count */
@@ -25,6 +25,7 @@ const
     }) => {
         try {
             const parentElm = parentValid(parent);
+            children = children || parentElm?.children;
             if (children?.length) {
                 const totalLength = children?.length || 0;
                 if (targetCount > totalLength) {

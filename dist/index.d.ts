@@ -2,7 +2,7 @@ declare const selectElement: (id: string, parent?: Element | string) => HTMLElem
 /** Repeat Elements */
 repeatElements: ({ children, parent, targetCount, }: {
     /** Child Element Nodes */
-    children?: NodeListOf<Element>;
+    children?: NodeListOf<Element> | HTMLCollection;
     /** Parent Element */
     parent: Element | string;
     /** Target Count */
