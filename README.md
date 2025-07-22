@@ -16,7 +16,7 @@ npm install @degreesign/ui
 OR use in browsers through CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.0.7/dist/browser/degreesign.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.0.8/dist/browser/degreesign.min.js"></script>
 ```
 
 ## Usage
