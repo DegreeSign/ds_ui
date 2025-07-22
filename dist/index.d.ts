@@ -4,7 +4,7 @@ repeatElements: ({ children, parent, targetCount, }: {
     /** Child Element Nodes */
     children?: NodeListOf<Element> | HTMLCollection;
     /** Parent Element */
-    parent: Element | string;
+    parent?: Element | HTMLElement | string;
     /** Target Count */
     targetCount: number;
 }) => void;

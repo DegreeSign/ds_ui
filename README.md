@@ -2,12 +2,21 @@
 
 A lightweight TypeScript library for managing UI elements in web applications.
 
-## Installation
+
+
+
+## Setup
 
 Install the package via npm:
 
 ```bash
 npm install @degreesign/ui
+```
+
+OR use in browsers through CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.0.5/dist/browser/degreesign.min.js"></script>
 ```
 
 ## Usage
