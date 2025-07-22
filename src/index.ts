@@ -8,8 +8,8 @@ const
         (parentValid(parent) || document)?.querySelector(id) as HTMLElement,
     selectAll = (id: string, parent?: Element | string) =>
         (parentValid(parent) || document)?.querySelectorAll(id) as NodeListOf<Element>,
-    showElement = (element: HTMLElement) => element && (element.style.display = `flex`),
-    hideElement = (element: HTMLElement) => element && (element.style.display = `none`),
+    showElement = (element?: HTMLElement) => element && (element.style.display = `flex`),
+    hideElement = (element?: HTMLElement) => element && (element.style.display = `none`),
     /** Repeat Elements */
     repeatElements = ({
         children,

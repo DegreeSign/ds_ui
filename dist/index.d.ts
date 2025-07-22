@@ -1,4 +1,4 @@
-declare const selectElement: (id: string, parent?: Element | string) => HTMLElement, selectAll: (id: string, parent?: Element | string) => NodeListOf<Element>, showElement: (element: HTMLElement) => string, hideElement: (element: HTMLElement) => string, 
+declare const selectElement: (id: string, parent?: Element | string) => HTMLElement, selectAll: (id: string, parent?: Element | string) => NodeListOf<Element>, showElement: (element?: HTMLElement) => "flex" | undefined, hideElement: (element?: HTMLElement) => "none" | undefined, 
 /** Repeat Elements */
 repeatElements: ({ children, parent, targetCount, }: {
     /** Child Element Nodes */
