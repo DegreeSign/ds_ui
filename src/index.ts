@@ -17,7 +17,7 @@ const
         targetCount,
     }: {
         /** Child Element Nodes */
-        children?: NodeListOf<Element> | HTMLCollection,
+        children?: NodeListOf<Element> | HTMLCollection | HTMLElement[],
         /** Parent Element */
         parent?: Element | HTMLElement | string,
         /** Target Count */
