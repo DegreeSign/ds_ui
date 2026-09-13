@@ -3,9 +3,9 @@ import type { LoadScriptParams } from '../types';
 
 const
     /** calls promises cache */
-    loadCalls: Record<string, Promise<void>> = {},
+    loadCalls: Record<string, Promise<boolean>> = {},
     /** Load external script once */
-    loadScript = ({
+    loadScript = async ({
         src,
         type = ResourceType.Script,
         ready,
@@ -20,7 +20,7 @@ const
             if (existing) return existing;
 
             // create new call
-            const call = new Promise<void>((resolve, reject) => {
+            const call = new Promise<boolean>(resolve => {
 
                 // track timing state
                 let
@@ -35,8 +35,7 @@ const
                         settled = true;
                         if (timer) clearTimeout(timer);
                         if (poll) clearTimeout(poll);
-                        if (error) reject();
-                        else resolve();
+                        resolve(!error);
                     },
 
                     // poll until ready
@@ -80,13 +79,15 @@ const
 
             // cache call
             loadCalls[src] = call;
-            call.catch(() => {
-                if (loadCalls[src] === call) delete loadCalls[src];
-            });
-            return call;
+
+            // await result and evict failed call
+            const success = await call;
+            if (!success && loadCalls[src] === call) delete loadCalls[src];
+            return success;
 
         } catch (e) {
             if (!hideConsoleErrors) console.log(`loadScript failed`, e);
+            return false;
         };
     };
 

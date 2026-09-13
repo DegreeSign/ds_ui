@@ -20,7 +20,7 @@ OR use in browsers through CDN
 
 ```html
 <script 
-    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.3/dist/browser/degreesign.min.js"
+    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.4/dist/browser/degreesign.min.js"
 ></script>
 ```
 
@@ -29,7 +29,7 @@ OR use in browsers through CDN
 Import the functions from the `@degreesign/ui` package in your TypeScript or JavaScript project:
 
 ```ts
-import { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript, FASTER_HEADER } from '@degreesign/ui';
+import { selectElement, selectAll, showElement, hideElement, repeatElements, createCaptcha, loadScript, FASTER_HEADER } from '@degreesign/ui';
 ```
 
 Below are the available functions and their usage examples.
@@ -39,7 +39,7 @@ Below are the available functions and their usage examples.
 Use the package directly in the browser without a build step by loading the UMD bundle from a CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.3/dist/browser/degreesign.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.4/dist/browser/degreesign.min.js"></script>
 ```
 
 The bundle exposes a global `dsUI` object containing all exported functions, enums, and constants:
@@ -152,6 +152,41 @@ repeatElements({ parent, children: selectAll('.child', parent), targetCount: 2 }
 // Result: 2 child divs inside #parent
 ```
 
+### Create Captcha
+
+Creates an hCaptcha form inside a parent element and loads the hCaptcha script on demand.
+
+**Parameters:**
+- `parentTag`: The parent element or CSS selector that will contain the captcha form.
+- `sitekey`: The hCaptcha site key.
+- `hideConsoleErrors` (optional): Set to `true` to disable console logging.
+
+**Returns:** A `CreateCaptcha` object with:
+- `loadCaptcha` (optional): Creates the form if needed and loads the captcha script, resolving to `true` on success and `false` on failure.
+- `captchaFrame` (optional): The `HTMLFormElement`, populated once `loadCaptcha` runs.
+- `getCaptchaToken`: Returns the current captcha response token, or an empty string.
+- `resetCaptcha`: Resets the captcha widget, loading the script if it is not yet available.
+
+**Example:**
+```ts
+const
+    {
+        loadCaptcha,
+        getCaptchaToken,
+        resetCaptcha,
+    } = createCaptcha({
+        parentTag: '.captcha_wrapper',
+        sitekey: 'your-sitekey' // obtain from https://dashboard.hcaptcha.com/sites
+    }),
+    loaded = await loadCaptcha(); // true when the script loaded
+
+// after user is ready
+if (loaded) {
+    const token = getCaptchaToken();
+    resetCaptcha(); // optional
+};
+```
+
 ### Load Script
 
 Loads an external script or stylesheet once and caches the returned promise.
@@ -160,11 +195,11 @@ Loads an external script or stylesheet once and caches the returned promise.
 - `src`: The resource URL.
 - `hideConsoleErrors` (optional): Set to `true` to disable console logging.
 
-**Returns:** A `Promise<void>`.
+**Returns:** A `Promise<boolean>` that resolves to `true` on success and `false` on failure.
 
 **Example:**
 ```ts
-loadScript({ src: 'https://example.com/lib.js', hideConsoleErrors: true });
+const loaded = await loadScript({ src: 'https://example.com/lib.js', hideConsoleErrors: true });
 ```
 
 ### Faster Request Header
