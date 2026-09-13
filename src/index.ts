@@ -16,11 +16,8 @@ export {
     createCaptcha,
     ResourceType,
     Display,
-    FASTER_HEADER,
-}
-
-export type {
     CreateCaptcha,
     CreateCaptchaParams,
     LoadScriptParams,
-}
+    FASTER_HEADER,
+};

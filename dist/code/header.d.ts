@@ -1,4 +1,3 @@
-import { OutgoingHttpHeaders } from "http2";
 /**
  * Faster Request Header (frontend only).
  * Use when making a request to a server using `@degreesign/server`
@@ -10,5 +9,5 @@ import { OutgoingHttpHeaders } from "http2";
  * - type=application/json still parsed
  * - requires compliant server
  */
-declare const FASTER_HEADER: OutgoingHttpHeaders;
+declare const FASTER_HEADER: HeadersInit;
 export { FASTER_HEADER, };
