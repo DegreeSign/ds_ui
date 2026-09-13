@@ -3,7 +3,6 @@ import { parentValid } from './select';
 import { CreateCaptcha, CreateCaptchaParams, LibsWindow } from '../types';
 
 const
-    libsWindow = window as LibsWindow,
     /** Create captcha form */
     createCaptcha = ({
         parentTag,
@@ -12,6 +11,7 @@ const
     }: CreateCaptchaParams): CreateCaptcha => {
         try {
             const
+                libsWindow = window as LibsWindow,
                 hCaptchaApiUrl = `https://js.hcaptcha.com/1/api.js`,
                 parentElement = parentValid(parentTag),
                 form = document.createElement(`form`),
