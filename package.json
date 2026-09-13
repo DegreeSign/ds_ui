@@ -1,6 +1,6 @@
 {
   "name": "@degreesign/ui",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "DegreeSign UI: frontend essentials for web app UI, including DOM controls, instant CAPTCHA implementation, and faster requests",
   "main": "dist/node/degreesign.node.min.js",
   "module": "dist/node/degreesign.node.min.js",

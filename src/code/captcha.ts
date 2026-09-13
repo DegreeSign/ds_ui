@@ -32,16 +32,15 @@ const
                     (captchaFrame?.elements.namedItem(`h-captcha-response`) as HTMLTextAreaElement)?.value
                     || ``,
 
-                // reset captcha or load script
-                resetCaptcha = () => {
-                    libsWindow.hcaptcha
-                        ? libsWindow.hcaptcha.reset()
-                        : loadCaptcha();
-                },
-
-                // create frame then load script
-                loadCaptcha = async () => {
+                // reset captcha or create frame then load script
+                reloadCaptcha = async () => {
                     try {
+
+                        // reset captcha when script already loaded
+                        if (libsWindow.hcaptcha) {
+                            libsWindow.hcaptcha.reset();
+                            return captchaFrame;
+                        };
 
                         // create captcha frame
                         if (parentElement && !captchaFrame) {
@@ -56,22 +55,22 @@ const
                         };
 
                         // load captcha script
-                        return await loadScript({ src: hCaptchaApiUrl, hideConsoleErrors });
+                        return await loadScript({ src: hCaptchaApiUrl, hideConsoleErrors })
+                            ? captchaFrame
+                            : undefined;
 
                         // report load failure
                     } catch (e) {
                         if (!hideConsoleErrors) console.log(loadingFailed, e);
-                        return false;
+                        return undefined;
                     };
                 };
 
             // return captcha controls
             if (parentElement)
                 return {
-                    loadCaptcha,
-                    captchaFrame,
+                    reloadCaptcha,
                     getCaptchaToken,
-                    resetCaptcha,
                 };
 
             // report creation failure
@@ -81,14 +80,11 @@ const
 
         // fallback controls
         return {
-            loadCaptcha: async () => {
+            reloadCaptcha: async () => {
                 if (!hideConsoleErrors) console.log(loadingFailed);
-                return false;
+                return undefined;
             },
             getCaptchaToken: () => ``,
-            resetCaptcha: () => {
-                if (!hideConsoleErrors) console.log(loadingFailed);
-            },
         };
     };
 

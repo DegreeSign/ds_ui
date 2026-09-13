@@ -33,14 +33,10 @@ export interface CreateCaptchaParams {
 }
 
 export interface CreateCaptcha {
-    /** Captcha form, populated once loadCaptcha runs */
-    captchaFrame?: HTMLFormElement;
+    /** Reset the captcha widget, or create the form and load the script, resolving to the captcha form or undefined on failure */
+    reloadCaptcha: () => Promise<HTMLFormElement | undefined>;
     /** Read the current captcha response token */
     getCaptchaToken: () => string;
-    /** Reset the captcha widget */
-    resetCaptcha: () => void;
-    /** Create the form and load the captcha script, resolving to its load success */
-    loadCaptcha?: () => Promise<boolean>;
 }
 
 export type LoadScriptParams = {
