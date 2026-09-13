@@ -20,7 +20,7 @@ OR use in browsers through CDN
 
 ```html
 <script 
-    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.3.0/dist/browser/degreesign.min.js"
+    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.3.1/dist/browser/degreesign.min.js"
 ></script>
 ```
 
@@ -39,7 +39,7 @@ Below are the available functions and their usage examples.
 Use the package directly in the browser without a build step by loading the UMD bundle from a CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.3.0/dist/browser/degreesign.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.3.1/dist/browser/degreesign.min.js"></script>
 ```
 
 The bundle exposes a global `dsUI` object containing all exported functions, enums, and constants:

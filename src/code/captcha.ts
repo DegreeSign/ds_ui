@@ -1,5 +1,5 @@
 import { loadScript } from './scripts';
-import { parentValid } from './select';
+import { parentValid, selectElement } from './select';
 import { CreateCaptcha, CreateCaptchaParams, LibsWindow } from '../types';
 
 const
@@ -43,7 +43,11 @@ const
                         };
 
                         // create captcha frame
-                        if (parentElement && !captchaFrame) {
+                        if (
+                            parentElement
+                            && !captchaFrame
+                            && !selectElement(`.captcha_frame`, parentElement) // protect against simultaneous calls
+                        ) {
                             captchaFrame = document.createElement(`form`);
                             captchaFrame.name = `cap`;
                             captchaFrame.classList.add(`captcha_frame`);
