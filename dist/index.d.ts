@@ -4,5 +4,6 @@ import { loadScript } from './code/scripts';
 import { createCaptcha } from './code/captcha';
 import { ResourceType, Display } from './types';
 import type { CreateCaptcha, CreateCaptchaParams, LoadScriptParams } from './types';
-export { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript, createCaptcha, ResourceType, Display, };
+import { FASTER_HEADER } from './code/header';
+export { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript, createCaptcha, ResourceType, Display, FASTER_HEADER, };
 export type { CreateCaptcha, CreateCaptchaParams, LoadScriptParams, };

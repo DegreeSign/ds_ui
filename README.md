@@ -1,6 +1,6 @@
 # DegreeSign UI functions
 
-A lightweight, dependency-free TypeScript library for selecting, showing, hiding, repeating, and dynamically loading UI elements and resources in web applications.
+A lightweight, dependency-free TypeScript library of frontend essentials for web app UI, including DOM controls, instant CAPTCHA implementation, and faster requests.
 
 ## Setup
 
@@ -20,7 +20,7 @@ OR use in browsers through CDN
 
 ```html
 <script 
-    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.1/dist/browser/degreesign.min.js"
+    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.2/dist/browser/degreesign.min.js"
 ></script>
 ```
 
@@ -29,7 +29,7 @@ OR use in browsers through CDN
 Import the functions from the `@degreesign/ui` package in your TypeScript or JavaScript project:
 
 ```ts
-import { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript } from '@degreesign/ui';
+import { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript, FASTER_HEADER } from '@degreesign/ui';
 ```
 
 Below are the available functions and their usage examples.
@@ -39,10 +39,10 @@ Below are the available functions and their usage examples.
 Use the package directly in the browser without a build step by loading the UMD bundle from a CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.1/dist/browser/degreesign.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.2.2/dist/browser/degreesign.min.js"></script>
 ```
 
-The bundle exposes a global `dsUI` object containing all exported functions and enums:
+The bundle exposes a global `dsUI` object containing all exported functions, enums, and constants:
 
 ```html
 <div id="myDiv">Hello</div>
@@ -165,6 +165,23 @@ Loads an external script or stylesheet once and caches the returned promise.
 **Example:**
 ```ts
 loadScript({ src: 'https://example.com/lib.js', hideConsoleErrors: true });
+```
+
+### Faster Request Header
+
+A ready-made `Content-Type` header for requests to a server built with `@degreesign/server`.
+
+A cross-origin `application/json` request is not a CORS "simple request", so the browser first sends an `OPTIONS` (preflight) call. Because `text/plain` is a simple content type, using `FASTER_HEADER` skips that preflight and can roughly double request speed, while the trailing `type=application/json` parameter tells the server to parse the body as JSON.
+
+**Example:**
+```ts
+import { FASTER_HEADER } from '@degreesign/ui';
+
+await fetch(`https://api.example.com/v1/endpoint`, {
+    method: `POST`,
+    headers: FASTER_HEADER,
+    body: JSON.stringify({ hello: `world` }),
+});
 ```
 
 ## Error Handling
