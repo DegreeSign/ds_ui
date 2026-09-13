@@ -1,9 +1,6 @@
 # DegreeSign UI functions
 
-A lightweight TypeScript library for managing UI elements in web applications.
-
-
-
+A lightweight, dependency-free TypeScript library for selecting, showing, hiding, repeating, and dynamically loading UI elements and resources in web applications.
 
 ## Setup
 
@@ -13,25 +10,52 @@ Install the package via npm:
 npm install @degreesign/ui
 ```
 
+OR via yarn:
+
+```bash
+yarn add @degreesign/ui
+```
+
 OR use in browsers through CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.0.8/dist/browser/degreesign.min.js"></script>
+<script 
+    src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.1.1/dist/browser/degreesign.min.js"
+></script>
 ```
 
 ## Usage
 
 Import the functions from the `@degreesign/ui` package in your TypeScript or JavaScript project:
 
-```javascript
-import { selectElement, selectAll, showElement, hideElement, repeatElements } from '@degreesign/ui';
+```ts
+import { selectElement, selectAll, showElement, hideElement, repeatElements, loadScript } from '@degreesign/ui';
 ```
 
 Below are the available functions and their usage examples.
 
+## CDN Usage
+
+Use the package directly in the browser without a build step by loading the UMD bundle from a CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@degreesign/ui@1.1.1/dist/browser/degreesign.min.js"></script>
+```
+
+The bundle exposes a global `dsUI` object containing all exported functions and enums:
+
+```html
+<div id="myDiv">Hello</div>
+<script>
+    const el = dsUI.selectElement('#myDiv');
+    dsUI.showElement(el);
+    dsUI.hideElement(el);
+</script>
+```
+
 ## Functions
 
-### `selectElement(id: string, parent?: Element) => HTMLElement`
+### Select Element
 
 Selects a single DOM element by its CSS selector, optionally within a parent element.
 
@@ -42,7 +66,7 @@ Selects a single DOM element by its CSS selector, optionally within a parent ele
 **Returns:** An `HTMLElement`.
 
 **Example:**
-```javascript
+```ts
 // Select an element by ID
 const myDiv = selectElement('#myDiv');
 myDiv.textContent = 'Hello, World!';
@@ -53,7 +77,7 @@ const child = selectElement('.child', parent);
 child.style.color = 'blue';
 ```
 
-### `selectAll(id: string, parent?: Element) => NodeListOf<Element>`
+### Select All
 
 Selects all DOM elements matching a CSS selector, optionally within a parent element.
 
@@ -64,7 +88,7 @@ Selects all DOM elements matching a CSS selector, optionally within a parent ele
 **Returns:** A `NodeListOf<Element>`.
 
 **Example:**
-```javascript
+```ts
 // Select all elements with a class
 const items = selectAll('.item');
 items.forEach(item => item.style.backgroundColor = 'lightgray');
@@ -75,7 +99,7 @@ const divs = selectAll('div', parent);
 divs.forEach(div => div.classList.add('highlight'));
 ```
 
-### `showElement(element: HTMLElement) => void`
+### Show Element
 
 Sets an element's display style to `flex`, making it visible.
 
@@ -83,12 +107,12 @@ Sets an element's display style to `flex`, making it visible.
 - `element`: The `HTMLElement` to show.
 
 **Example:**
-```javascript
+```ts
 const myDiv = selectElement('#myDiv');
 showElement(myDiv); // Displays the element with flex layout
 ```
 
-### `hideElement(element: HTMLElement) => void`
+### Hide Element
 
 Sets an element's display style to `none`, hiding it.
 
@@ -96,12 +120,12 @@ Sets an element's display style to `none`, hiding it.
 - `element`: The `HTMLElement` to hide.
 
 **Example:**
-```javascript
+```ts
 const myDiv = selectElement('#myDiv');
 hideElement(myDiv); // Hides the element
 ```
 
-### `repeatElements({ children?: NodeListOf<Element>, parent: Element, targetCount: number }) => void`
+### Repeat Elements
 
 Repeats or removes child elements within a parent to match a target count by cloning or removing the first child.
 
@@ -111,7 +135,7 @@ Repeats or removes child elements within a parent to match a target count by clo
 - `targetCount`: The desired number of child elements.
 
 **Example:**
-```javascript
+```ts
 // HTML structure:
 // <div id="parent">
 //   <div class="child">Item</div>
@@ -126,6 +150,21 @@ repeatElements({ parent, children, targetCount: 5 });
 // Reduce to 2 child elements
 repeatElements({ parent, children: selectAll('.child', parent), targetCount: 2 });
 // Result: 2 child divs inside #parent
+```
+
+### Load Script
+
+Loads an external script or stylesheet once and caches the returned promise.
+
+**Parameters:**
+- `src`: The resource URL.
+- `hideConsoleErrors` (optional): Set to `true` to disable console logging.
+
+**Returns:** A `Promise<void>`.
+
+**Example:**
+```ts
+loadScript({ src: 'https://example.com/lib.js', hideConsoleErrors: true });
 ```
 
 ## Error Handling

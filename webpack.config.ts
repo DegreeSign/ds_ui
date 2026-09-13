@@ -40,7 +40,7 @@ const
         output: {
             path: path.resolve(__dirname, `dist/browser`), // Separate output directory
             filename: `degreesign.min.js`,
-            library: `degreesign`, // Global variable for browsers
+            library: `dsUI`, // Global variable for browsers
             libraryTarget: `umd`, // UMD for browser
             globalObject: `this`,
         },
