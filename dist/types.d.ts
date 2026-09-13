@@ -13,6 +13,24 @@ export declare enum Display {
 export declare enum TypeName {
     String = "string"
 }
+export type LibsWindow = Window & {
+    hcaptcha?: {
+        reset: (id?: string) => void;
+    };
+};
+export interface CreateCaptchaParams {
+    /** Parent element or selector */
+    parentTag: string | HTMLElement;
+    /** hCaptcha site key */
+    sitekey: string;
+    /** Disable console logging */
+    hideConsoleErrors?: boolean;
+}
+export interface CreateCaptcha {
+    captchaFrame?: HTMLFormElement;
+    getCaptchaToken: () => string;
+    resetCaptcha: () => void;
+}
 export type LoadScriptParams = {
     /** Resource URL */
     src: string;

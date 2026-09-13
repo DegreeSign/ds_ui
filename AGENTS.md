@@ -24,6 +24,8 @@
 
 - **Only bump the `version` in `package.json` when explicitly requested.** When requested,
   bump it. Never bump the version on your own initiative.
+- **When the version is bumped, update every matching version reference in `README.md`**
+  (e.g. the CDN URLs) to the new version.
 
 ## Minimal diff rules
 

@@ -17,17 +17,38 @@ export enum TypeName {
     String = `string`,
 }
 
+export type LibsWindow = Window & {
+    hcaptcha?: {
+        reset: (id?: string) => void;
+    };
+}
+
+export interface CreateCaptchaParams {
+    /** Parent element or selector */
+    parentTag: string | HTMLElement;
+    /** hCaptcha site key */
+    sitekey: string;
+    /** Disable console logging */
+    hideConsoleErrors?: boolean;
+}
+
+export interface CreateCaptcha {
+    captchaFrame?: HTMLFormElement;
+    getCaptchaToken: () => string;
+    resetCaptcha: () => void;
+}
+
 export type LoadScriptParams = {
     /** Resource URL */
-    src: string,
+    src: string;
     /** Resource type */
-    type?: ResourceType,
+    type?: ResourceType;
     /** Defaults to load event */
-    ready?: () => boolean,
+    ready?: () => boolean;
     /** Readiness poll (ms) */
-    interval?: number,
+    interval?: number;
     /** Max wait (ms) */
-    timeout?: number,
+    timeout?: number;
     /** Disable console logging */
-    hideConsoleErrors?: boolean,
+    hideConsoleErrors?: boolean;
 };
